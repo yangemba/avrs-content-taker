@@ -34,11 +34,14 @@ def take_images(response):
 
 
 def parse_info(response):
-    first = response.text.split('id="descripRealty">')
-    comment = first[1].split('</div>')[0].replace('\n', '').replace('            ', '').replace('          ', '')\
-        .replace('\r1', '').replace('\r2', '').replace('\r3', '').replace('\r', '').replace('\r4', '')\
-        .replace('<p>', '').replace('<b>', '').replace('\rB', '')
-    image_list = take_images(response)
+    try:
+        first = response.text.split('id="descripRealty">')
+        comment = first[1].split('</div>')[0].replace('\n', '').replace('            ', '').replace('          ', '')\
+            .replace('\r1', '').replace('\r2', '').replace('\r3', '').replace('\r', '').replace('\r4', '')\
+            .replace('<p>', '').replace('<b>', '').replace('\rB', '')
+        image_list = take_images(response)
+    except Exception as e:
+        return None
     return comment, image_list
 
 
@@ -57,9 +60,16 @@ def id_from_response(response):
     return main_id
 
 
+def id_from_req(url):
+    first = str(url).split('flat/')[1]
+    main_id = first.split('.ht')[0]
+    return main_id
+
+
 def req_request(url):
     try:
-        response = requests.get(url=url, allow_redirects=False)
+        response = requests.get(url=url, allow_redirects=True)
+
     except Exception as e:
         return None
     return response
@@ -72,18 +82,23 @@ async def scrap():
             loop.run_in_executor(executor, req_request, f'http://avers.in.ua/flat/{i}.htm')
             for i in id_list
         ]
+
         for response in await asyncio.gather(*futures):
+            if not response:
+                response_list.append({f"{id_from_req(response.request.url)}": None})
             if response.status_code != 200:
                 response_list.append({f"{id_from_response(response)}": None})
                 continue
-            try:
-                logging.warning(response.status_code)
-                info = parse_info(response)
-            except Exception as e:
-                logging.warning(f"error: {e}")
-                response_list.append({f"{id_from_response(response)}": 'exception'})
+            # try:
+            logging.warning(response.status_code)
+            info = parse_info(response)
+            # except Exception as e:
+            #     logging.warning(f"error: {e}")
+            #     response_list.append({f"{id_from_response(response)}": 'exception'})
             if info:
                 response_list.append({f"{id_from_response(response)}": info})
+            else:
+                response_list.append({f"{id_from_response(response)}": None})
 
 
 if __name__ == "__main__":
@@ -116,6 +131,7 @@ if __name__ == "__main__":
     for row in rows_list:
         for el in response_list:
             if el.get(row[0]):
+                print(el.get[row[0]])
                 final_list.append(row + el[row[0]])
 
     print(len(final_list))
