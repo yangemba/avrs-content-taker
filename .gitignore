@@ -104,4 +104,7 @@ venv.bak/
 .mypy_cache/
 
 xml2xlsx
+.idea
 
+final.csv
+final_list.txt

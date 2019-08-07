@@ -10,6 +10,8 @@ class TakeData(object):
         max_columns = self.sheet.max_column
         # c = sheet.cell(row=1, column=1).value
         list_hat = [self.sheet.cell(row=1, column=i).value for i in range(1, max_columns + 1)]
+        list_hat.append('comment')
+        list_hat.append('links')
         return list_hat
 
     def take_other_rows(self):

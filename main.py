@@ -7,6 +7,7 @@ import time
 import bs4
 import logging
 from test import TakeData
+import csv
 
 start = time.time()
 
@@ -90,12 +91,12 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     loop.run_until_complete(scrap())
     finish = time.time()
-
-    for i in response_list:
-        print(i.values())
-
-    print(len(response_list))
-    print(str(finish - start))
+    #
+    # for i in response_list:
+    #     print(i.values())
+    # #
+    # print(len(response_list))
+    # print(str(finish - start))
 
     with open('result.txt', 'w') as file:
         pass
@@ -110,14 +111,33 @@ if __name__ == "__main__":
     take_data = TakeData('test-flats.xlsx')
     hat = take_data.take_hat()
     rows_list = take_data.take_other_rows()
+    # print(rows_list)
 
     final_list = []
 
     for row in rows_list:
         for el in response_list:
-            if el.get(row[0]):
-                final_list.append(row + el[row[0]])
+            # print(f'###{el.get(row[0])}')
+            if el.get(str(row[0])):
+                final_list.append(row + list((el.get(str(row[0])))))
+    # for i in final_list:
+    #     print(f'{i}\n')
 
-    print(len(final_list))
+    hat_string = f'{"  ".join(hat)}\n'
+
+    with open("final.csv", "w", ) as file:
+        file.write(hat_string)
+
+    for element in final_list:
+        current_str_row = f'{"  ".join(map(str, element))}\n'
+        with open("final.csv", "a", ) as file:
+            file.write(current_str_row)
+
+
+
+
+    # with open("final.csv", "a", newline="") as file:
+    #     writer = csv.writer(file)
+    #     writer.writerows(final_list)
 
 # Todo try to understand why lenth of the list is null
