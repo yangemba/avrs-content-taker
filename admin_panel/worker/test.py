@@ -28,12 +28,12 @@ class TakeData(object):
             #     return self.sheet.cell(row=row, column=i).value
 
 
-if __name__ == "__main__":
-    take_data = TakeData('test-flats.xlsx')
-    print(take_data.take_hat())
-    print('\n\n')
-    print(take_data.take_other_rows())
-
+# if __name__ == "__main__":
+#     take_data = TakeData('test-flats.xlsx')
+#     print(take_data.take_hat())
+#     print('\n\n')
+#     print(take_data.take_other_rows())
+#
 
 
 
