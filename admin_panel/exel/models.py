@@ -1,5 +1,5 @@
 from django.db import models
-from ..worker.exel_performer import WorkExel
+from .exel_performer import WorkExel
 
 
 def user_directory_path(instance, filename):
