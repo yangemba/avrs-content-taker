@@ -2,11 +2,11 @@ FROM python:3.7.3
 
 RUN echo "alias ll='ls -al --color=auto'" >> /root/.bashrc
 
-RUN mkdir /code
 WORKDIR /code
-ADD . /code/
 
-RUN pip3 install -r requirements.txt
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
 
 CMD [ "./start_service.sh" ]
 

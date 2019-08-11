@@ -3,7 +3,8 @@ services:
   backend:
     image: avers
     volumes:
-      - /home/yanhemba/workspase/yan/avrs-content-taker/admin_panel/results:/code/admin_panel/results
+      - .:/code/
+      - /home/yanhemba/workspase/yan/avrs-content-taker/admin_panel/results:/code/results
     ports:
         - "8234:9001"
 #    deploy:
