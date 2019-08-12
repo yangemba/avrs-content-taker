@@ -6,7 +6,7 @@ import time
 import bs4
 import logging
 from .test import TakeData
-
+import datetime
 start = time.time()
 
 
@@ -99,14 +99,17 @@ class WorkExel(object):
                 if el.get(str(row[0])):
                     final_list.append(row + list((el.get(str(row[0])))))
 
-        hat_string = f'{"  ".join(hat)}\n'
+        hat_s = "\t".join(hat)
+        hat_string = f'{hat_s}\n'
+        today = datetime.date.today()
 
-        with open("results/final.csv", "w", ) as file:
+        with open(f"results/{today}.csv", "w", ) as file:
             file.write(hat_string)
 
         for element in final_list:
-            current_str_row = f'{"  ".join(map(str, element))}\n'
-            with open("results/final.csv", "a", ) as file:
+            curl = "\t".join(map(str, element))
+            current_str_row = f'{curl}\n'
+            with open(f"results/{today}.csv", "a", ) as file:
                 file.write(current_str_row)
 
 #
