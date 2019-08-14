@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  backend:
+    image: avers
+    volumes:
+      - .:/code/
+      - /home/yan/WORKSPASE/HAND_MADE/avrs-content-taker/admin_panel/result:/code/results
+    ports:
+        - "8222:9001"
