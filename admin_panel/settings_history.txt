@@ -1,0 +1,1 @@
+/home/yanhemba/workspase/yan/avrs-content-taker/admin_panel/results:/code/results

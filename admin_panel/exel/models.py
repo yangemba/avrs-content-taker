@@ -27,13 +27,13 @@ class AversFlat(models.Model):
         worker_exel.main_perform()
 
         today = datetime.date.today()
-        file_result_path = f'results/{today}.csv'
-        try:
-            input_file_instance = InputExel()
-            logging.warning(f'Making instance')
-            input_file_instance.current_file = file_result_path
-            logging.warning(f'Specify field path')
-            input_file_instance.save()
-            logging.warning(f'Save')
-        except Exception as e:
-            logging.warning(f'Error - {e}')
+        file_result_path = f'{today}.csv'
+        # try:
+        #     input_file_instance = InputExel()
+        #     logging.warning(f'Making instance')
+        #     input_file_instance.current_file = file_result_path
+        #     logging.warning(f'Specify field path')
+        #     input_file_instance.save()
+        #     logging.warning(f'Save')
+        # except Exception as e:
+        #     logging.warning(f'Error - {e}')

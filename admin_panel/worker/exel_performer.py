@@ -100,13 +100,13 @@ class WorkExel(object):
 
         hat_string = f'{"  ".join(hat)}\n'
 
-        with open("result/final.csv", "w", ) as file:
-            file.write(hat_string)
-
-        for element in final_list:
-            current_str_row = f'{"  ".join(map(str, element))}\n'
-            with open("result/final.csv", "a", ) as file:
-                file.write(current_str_row)
+        # with open("result/final.csv", "w", ) as file:
+        #     file.write(hat_string)
+        #
+        # for element in final_list:
+        #     current_str_row = f'{"  ".join(map(str, element))}\n'
+        #     with open("result/final.csv", "a", ) as file:
+        #         file.write(current_str_row)
 
 #
 # if __name__ == "__main__":

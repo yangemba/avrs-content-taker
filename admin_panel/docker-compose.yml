@@ -4,7 +4,7 @@ services:
     image: avers
     volumes:
       - .:/code/
-      - /home/yanhemba/workspase/yan/avrs-content-taker/admin_panel/results:/code/results
+      - /home/yan/WORKSPASE/HAND_MADE/avrs-content-taker/admin_panel/results:/code/results
     ports:
         - "8234:9001"
 #    deploy:
